@@ -27,7 +27,7 @@ class _DropdownTypeState extends State<DropdownType> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      // elevation: 10,
       color: widget.color,
       child: DropdownButton<String>(
         items: widget.list.map((String value) {
@@ -42,6 +42,8 @@ class _DropdownTypeState extends State<DropdownType> {
         value: dropdownValue,
         dropdownColor: widget.color,
         iconSize: 40,
+        iconDisabledColor: Colors.white,
+        iconEnabledColor: Colors.white,
         autofocus: false,
         underline: const SizedBox(),
         padding: const EdgeInsets.symmetric(horizontal: 20),

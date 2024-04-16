@@ -90,7 +90,10 @@ class OnboardingPage extends ConsumerWidget {
             ? const CircularProgressIndicator(
                 color: Colors.white,
               )
-            : const Icon(Icons.arrow_forward),
+            : const Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
+              ),
       ),
     );
   }
