@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:onboarding_trial/src/presentation/controllers/onboardgin_controller.dart';
+import 'package:onboarding_trial/src/presentation/controllers/onboarding_controller.dart';
 import 'package:onboarding_trial/src/presentation/core/my_images.dart';
 import 'package:onboarding_trial/src/presentation/core/my_typography.dart';
 import 'package:onboarding_trial/src/presentation/widgets/custom_circular_slider.dart';
@@ -44,16 +44,21 @@ class OnboardingPage extends ConsumerWidget {
             ),
             offsetImage: 24,
             title: Text(
-              'Turn the circle',
+              'Turn the circles',
               style: MyTypography.body1,
             ),
             offsetTitle: 24,
             subtitle: CustomCircularSlider(
-                action: controller.setYoutubeVideos,
-                value: controller.youtuveVideos),
+                maxHours: controller.maxHours,
+                setHours: controller.setHours,
+                setMinutes: controller.setMinutes,
+                hours: controller.hours,
+                minutes: controller.minutes),
             offsetSubtitle: 24,
-            description: const DropdownType(
-              list: ['per week', 'per day'],
+            description: DropdownType(
+              list: const ['per week', 'per day'],
+              onChanged: (String value) => controller.changeMaxHours(value),
+              color: Colors.redAccent,
             ),
           ),
         ],

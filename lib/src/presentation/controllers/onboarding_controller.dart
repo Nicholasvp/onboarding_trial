@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:onboarding_trial/src/routes/my_routes.dart';
 
-class OnboardginController extends ChangeNotifier {
+class OnboaardingController extends ChangeNotifier {
   final PageController pageController = PageController();
   int currentPage = 0;
-  int articules = 0;
-  int youtuveVideos = 0;
+  int hours = 10;
+  int minutes = 10;
   bool isLoading = false;
+  int maxHours = 160;
 
   void onPageChanged(int page) {
     currentPage = page;
@@ -15,7 +16,7 @@ class OnboardginController extends ChangeNotifier {
   }
 
   void nextPage(BuildContext context) async {
-    if (currentPage < 2) {
+    if (currentPage < 1) {
       currentPage++;
 
       pageController.nextPage(
@@ -24,6 +25,7 @@ class OnboardginController extends ChangeNotifier {
       );
     } else {
       loading();
+      currentPage = 0;
       await Future.delayed(const Duration(seconds: 2)).then(
           (value) => Navigator.pushReplacementNamed(context, MyRoutes.home));
 
@@ -42,13 +44,13 @@ class OnboardginController extends ChangeNotifier {
     }
   }
 
-  void setArticules(int value) {
-    articules = value;
+  void setHours(double value) {
+    hours = value.ceil();
     notifyListeners();
   }
 
-  void setYoutubeVideos(int value) {
-    youtuveVideos = value;
+  void setMinutes(double value) {
+    minutes = value.ceil();
     notifyListeners();
   }
 
@@ -61,7 +63,17 @@ class OnboardginController extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  void changeMaxHours(String value) {
+    if (value == 'per week') {
+      maxHours = 160;
+    } else {
+      hours > 23 ? hours = 21 : null;
+      maxHours = 23;
+    }
+    notifyListeners();
+  }
 }
 
 final onboardingController =
-    ChangeNotifierProvider((ref) => OnboardginController());
+    ChangeNotifierProvider((ref) => OnboaardingController());

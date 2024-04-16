@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:onboarding_trial/src/presentation/controllers/onboarding_controller.dart';
 import 'package:onboarding_trial/src/presentation/core/my_images.dart';
 import 'package:onboarding_trial/src/presentation/core/my_typography.dart';
 import 'package:onboarding_trial/src/routes/my_routes.dart';
@@ -90,25 +92,28 @@ class RegisterPage extends StatelessWidget {
                         const SizedBox(
                           height: 40,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(MyRoutes.onboarding);
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Register',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                        Consumer(
+                          builder: (context, ref, _) => Material(
+                            child: InkWell(
+                              onTap: () {
+                                ref.watch(onboardingController).currentPage = 0;
+                                Navigator.of(context)
+                                    .pushNamed(MyRoutes.onboarding);
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Register',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
